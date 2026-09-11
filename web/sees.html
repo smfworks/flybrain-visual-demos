@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>What the fly sees — FLYBRAIN demos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/panel.css">
+</head>
+<body class="demo">
+  <header class="bar">
+    <a class="back" href="/">← gallery</a>
+    <h1>What the fly sees</h1>
+    <span class="sub">texture → mosaic → gauges → path</span>
+    <span class="grow"></span>
+    <span class="pill amber" id="mode"><span class="pip" id="pip"></span><span id="mode-label">LITE</span></span>
+  </header>
+  <div class="split four" style="min-height:calc(100vh - 120px)">
+    <div class="pane" style="min-height:52vh">
+      <h3>01 · stimulus / page texture</h3>
+      <canvas id="page"></canvas>
+    </div>
+    <div class="pane" style="min-height:52vh">
+      <h3>02 · 892-hex mosaic</h3>
+      <canvas id="retina"></canvas>
+    </div>
+    <div class="pane" style="min-height:52vh;padding:48px 16px 16px;background:var(--ground)">
+      <h3>03 · descending neurons</h3>
+      <div class="cells" id="cells"></div>
+      <div class="stats" style="margin-top:18px">
+        <div class="stat"><div class="n" id="on-hz">—</div><div class="l">L1 ON</div></div>
+        <div class="stat"><div class="n" id="off-hz">—</div><div class="l">L2 OFF</div></div>
+      </div>
+    </div>
+    <div class="pane" style="min-height:52vh">
+      <h3>04 · cursor path</h3>
+      <canvas id="path"></canvas>
+    </div>
+  </div>
+  <div class="note-strip">
+    All four panes are readouts of the same step. The page is a dark UI because the fly’s retina is a luminance map —
+    light mode broke field-filling on the launchpad. Labels, not decoration. CC-BY connectome. Private preview.
+  </div>
+  <script type="module" src="/static/js/sees.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>FLYBRAIN — five windows into a measured brain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/panel.css">
+</head>
+<body>
+  <header class="bar">
+    <span class="pill amber"><span class="pip" id="pip"></span><span id="live-mode">private preview</span></span>
+    <span class="grow"></span>
+    <span class="sub">not published · not a paper UI</span>
+  </header>
+
+  <div class="hero">
+    <canvas id="hero" aria-hidden="true"></canvas>
+    <div class="veil"></div>
+    <div class="copy">
+      <div class="eyebrow" style="color:var(--cyan);letter-spacing:.22em">digital fruit-fly brain</div>
+      <h1>FLYBRAIN</h1>
+      <div class="latin">Drosophila melanogaster · 165,122 neurons · 10,228,000 synapses</div>
+      <div class="state">five windows into a measured brain</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">The gallery</p>
+      <h2>Demos you stop scrolling for.</h2>
+      <p class="lede">
+        Each panel is a readout, not a render farm. The hex mosaic is the fly’s 892-column retina.
+        The gauges are descending neurons a fly walks with. Lite mode is honest about the reduced
+        mapping; full-brain mode drives the same UI from the real LIF connectome.
+      </p>
+      <div class="cards">
+        <a class="card" href="/chase">
+          <span class="num">01 · stimulus chase</span>
+          <h3>Chase</h3>
+          <p>A luminous target on a dark field. The hex retina lights. DNa02 left/right asymmetry steers a fly-cursor after it.</p>
+          <span class="go">open demo →</span>
+        </a>
+        <a class="card" href="/avalanche">
+          <span class="num">02 · spike avalanche</span>
+          <h3>Avalanche</h3>
+          <p>Poke the visual field. Watch a cascade through the CNS volume — measured somata when the annotations are loaded.</p>
+          <span class="go">open demo →</span>
+        </a>
+        <a class="card" href="/learning">
+          <span class="num">03 · learning theater</span>
+          <h3>Learning</h3>
+          <p>KC→MBON depression under dopamine. The −6% story, watchable. Novelty-as-reward is labelled as a modelling choice.</p>
+          <span class="go">open demo →</span>
+        </a>
+        <a class="card" href="/sees">
+          <span class="num">04 · what the fly sees</span>
+          <h3>Sees</h3>
+          <p>Split view: page texture → 892-hex mosaic → descending-neuron gauges → cursor path. Every pane is a readout.</p>
+          <span class="go">open demo →</span>
+        </a>
+        <a class="card" href="/nose">
+          <span class="num">05 · nose / ORN</span>
+          <h3>Nose</h3>
+          <p>A scent plume across 53 receptor types. 2,635 ORNs flycoinrh left unused, now lighting the antennal lobe.</p>
+          <span class="go">open demo →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Motor readouts</p>
+      <h2>What walks.</h2>
+      <div class="wires">
+        <div class="wire"><div class="cell">DNa02 L / R</div><div class="role">Steering. A fly turns by left/right asymmetry. Cursor x.</div></div>
+        <div class="wire"><div class="cell">DNa01</div><div class="role">Forward walking. Cursor y, up the page.</div></div>
+        <div class="wire"><div class="cell">MDN</div><div class="role">Moonwalker descending neuron. Reverse.</div></div>
+        <div class="wire"><div class="cell">DNp09</div><div class="role">Stopping. The click.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Honesty</p>
+      <h2>Measured, then invented.</h2>
+      <p class="honesty">
+        The connectome is <b>CC-BY</b> — HHMI Janelia FlyEM, the Cambridge Connectomics Group, and Google Research.
+        Simulation approach after <a href="https://github.com/fruitflydev/flycoinrh">fruitflydev/flycoinrh</a>,
+        Shiu et al. 2024 and Lappalainen et al. 2024. This gallery does not own that brain.
+      </p>
+      <p class="honesty">
+        Lite mode samples the stimulus through the same 892-hex L1/L2 math as FlyEye, then uses a
+        <b>reduced spatial pooling</b> onto descending neurons, decoded with FlyPilot’s equations.
+        When <code>graph.npz</code> is present, those gauges come from <code>FlyBrain.run</code>.
+        The mushroom-body reward signal is not real. The olfactory motor bias is demo wiring.
+      </p>
+      <p class="honesty">Private preview — not published. MIT for new code. Keep the CC-BY attribution wherever the connectome goes.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links">
+        <a href="https://github.com/fruitflydev/flycoinrh">flycoinrh</a>
+        <a href="https://flybrain.online">flybrain.online</a>
+        <a href="/chase">chase</a>
+        <a href="/avalanche">avalanche</a>
+        <a href="/learning">learning</a>
+        <a href="/sees">sees</a>
+        <a href="/nose">nose</a>
+      </div>
+      <div>Connectome data © HHMI Janelia FlyEM, Cambridge Connectomics Group, Google Research (CC-BY 4.0). Not affiliated.</div>
+    </div>
+  </footer>
+  <script type="module" src="/static/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Nose / ORN — FLYBRAIN demos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/panel.css">
+</head>
+<body class="demo">
+  <header class="bar">
+    <a class="back" href="/">← gallery</a>
+    <h1>Nose / ORN</h1>
+    <span class="sub">2,635 ORNs · 53 receptor types</span>
+    <span class="grow"></span>
+    <span class="pill amber" id="mode"><span class="pip" id="pip"></span><span id="mode-label">LITE</span></span>
+  </header>
+  <main class="stage">
+    <section style="display:grid;grid-template-rows:1fr 1fr;gap:1px;background:var(--line);min-height:calc(100vh - 58px)">
+      <div class="plate" style="min-height:0">
+        <canvas id="plume"></canvas>
+        <div class="corner tl">scent plume · demo wiring into walk</div>
+        <div class="corner tr" id="odour-name">clear air</div>
+        <div class="corner bl">vision still on · hex below</div>
+      </div>
+      <div class="split" style="min-height:0">
+        <div class="pane" style="min-height:0">
+          <h3>892-hex retina (still sampling)</h3>
+          <canvas id="retina"></canvas>
+        </div>
+        <div class="pane" style="min-height:0">
+          <h3>antennal lobe · 53 glomeruli / types</h3>
+          <canvas id="al"></canvas>
+        </div>
+      </div>
+    </section>
+    <aside class="side">
+      <div>
+        <div class="k">Odour identity</div>
+        <div class="row" id="odours"></div>
+      </div>
+      <div>
+        <div class="k">Olfactory readout</div>
+        <div class="stats">
+          <div class="stat"><div class="n" id="peak">—</div><div class="l">peak receptor</div></div>
+          <div class="stat"><div class="n" id="mean">—</div><div class="l">mean ORN Hz</div></div>
+          <div class="stat"><div class="n" id="pc1">—</div><div class="l">pC1 (cVA path)</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="k">Descending neurons (vision + odour bias)</div>
+        <div class="cells" id="cells"></div>
+      </div>
+      <p class="honesty" id="olf-note"></p>
+      <p class="honesty">cVA through ORN_DA1 drives pC1 at 222 Hz untrained — flycoinrh’s measurement that the pathway works. Ligand affinities for cVA, CO2, geosmin, fruit esters follow the literature. Biasing DNa02/DNa01 from ORN rates is invented for this demo.</p>
+      <p class="honesty" id="mode-blurb"></p>
+    </aside>
+  </main>
+  <div class="note-strip">
+    Unused in flycoinrh, plugged in here. 53 types, 2,635 ORNs. Private preview. Connectome CC-BY.
+  </div>
+  <script type="module" src="/static/js/nose.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+flybrain-visual-demos
+=====================
+
+The code in this repository is MIT licensed — see LICENSE.
+That licence covers the new code in this repository and nothing else.
+
+The male Drosophila CNS connectome is not ours to license. It is
+© HHMI Janelia FlyEM, the Cambridge Connectomics Group and Google Research,
+released under CC-BY 4.0, and it stays under CC-BY wherever it goes.
+
+The simulation approach (LIF over signed synapses, 892-hex L1/L2 sampling,
+DNa02/DNa01/MDN/DNp09 readout, KC→MBON depression) follows
+fruitflydev/flycoinrh, after Shiu et al. 2024 and Lappalainen et al. 2024.
+This gallery does not claim ownership of that project or of the connectome.
+
+This repository is a private preview. It is not a published site.
