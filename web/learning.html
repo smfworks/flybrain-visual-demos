@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Learning theater — FLYBRAIN demos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/panel.css">
+</head>
+<body class="demo">
+  <header class="bar">
+    <a class="back" href="/">← gallery</a>
+    <h1>Learning theater</h1>
+    <span class="sub">KC → MBON · depression, not potentiation</span>
+    <span class="grow"></span>
+    <span class="pill amber" id="mode"><span class="pip" id="pip"></span><span id="mode-label">LITE</span></span>
+  </header>
+  <main class="stage">
+    <section class="plate tall" style="background:var(--ground);padding:28px 24px;overflow:auto">
+      <p class="eyebrow">Mushroom body</p>
+      <h2 style="margin-bottom:8px">Subtraction is the rule.</h2>
+      <p class="lede">A Kenyon cell active shortly before dopamine has that KC→MBON synapse depressed. Learning in a fly carves away responses that did not pay. Twenty rewarded encounters with one view: reward-side <b style="color:var(--amber)">−6.0%</b>, punishment-side −0.9% (flycoinrh measurement).</p>
+      <div class="mb">
+        <div class="col">
+          <h4>Reward-side · MBON01 02 03 · PAM</h4>
+          <div class="delta" id="r-delta">0.0%</div>
+          <div class="k" style="margin-top:8px">mean gain <span id="r-gain">1.000</span></div>
+          <div class="gain-meter"><span id="r-meter"></span></div>
+          <canvas id="h-rew" style="width:100%;height:88px;margin-top:12px;display:block"></canvas>
+        </div>
+        <div class="col">
+          <h4>Punishment-side · MBON04 10 11 · PPL1</h4>
+          <div class="delta dim" id="p-delta">0.0%</div>
+          <div class="k" style="margin-top:8px">mean gain <span id="p-gain">1.000</span></div>
+          <div class="gain-meter cyan"><span id="p-meter"></span></div>
+          <canvas id="h-pun" style="width:100%;height:88px;margin-top:12px;display:block"></canvas>
+        </div>
+      </div>
+      <div class="k" style="margin-top:22px">Kenyon cells · eligibility for this view</div>
+      <canvas id="kc" style="width:100%;height:120px;margin-top:10px;display:block;background:#05070c"></canvas>
+      <div class="row" style="margin-top:22px">
+        <button class="amber" id="btn-nov">novelty (as reward)</button>
+        <button id="btn-rew">reward</button>
+        <button id="btn-pun">punish</button>
+        <button class="amber" id="btn-20">twenty encounters</button>
+        <button class="ghost" id="btn-reset">forget</button>
+      </div>
+      <p class="honesty" style="margin-top:18px" id="event-note">The reward signal is not real. Novelty standing in for sugar is a modelling choice — the fly has no say in it.</p>
+    </section>
+    <aside class="side">
+      <div>
+        <div class="k">Population</div>
+        <div class="stats">
+          <div class="stat"><div class="n" id="n-syn">44042</div><div class="l">KC→MBON synapses</div></div>
+          <div class="stat"><div class="n" id="n-dep">0</div><div class="l">depressed</div></div>
+          <div class="stat"><div class="n" id="n-rew">0</div><div class="l">reward events</div></div>
+          <div class="stat"><div class="n" id="n-pun">0</div><div class="l">punish events</div></div>
+          <div class="stat"><div class="n" id="n-nov">0</div><div class="l">novelty-as-reward</div></div>
+        </div>
+      </div>
+      <p class="honesty">Circuit, site, and direction of the rule are measured. 27,939 reward-side / 14,349 punish-side synapses — that lopsidedness is in the data. Lite uses a stand-in population with those counts; the real MushroomBody module is used when the graph is loaded.</p>
+      <p class="honesty" id="mode-blurb"></p>
+    </aside>
+  </main>
+  <div class="note-strip">
+    No potentiation. Floor 0.25, slow drift back toward 1.0 (forgetting). Private preview. After flycoinrh mushroom.py.
+  </div>
+  <script type="module" src="/static/js/learning.js"></script>
+</body>
+</html>

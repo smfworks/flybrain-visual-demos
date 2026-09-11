@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Spike avalanche — FLYBRAIN demos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/panel.css">
+</head>
+<body class="demo">
+  <header class="bar">
+    <a class="back" href="/">← gallery</a>
+    <h1>Spike avalanche</h1>
+    <span class="sub">poke the eye · cascade the volume</span>
+    <span class="grow"></span>
+    <span class="pill amber" id="mode"><span class="pip" id="pip"></span><span id="mode-label">LITE</span></span>
+    <button class="ghost" id="reset">clear</button>
+  </header>
+  <main class="stage">
+    <section class="split" style="min-height:0;height:100%">
+      <div class="pane" style="min-height:0;height:100%">
+        <h3>visual field · click to poke</h3>
+        <canvas id="retina"></canvas>
+      </div>
+      <div class="pane" style="min-height:0;height:100%">
+        <h3>CNS volume · soma coordinates</h3>
+        <canvas id="cns"></canvas>
+        <div class="corner bl" id="soma-src">stylized CNS</div>
+      </div>
+    </section>
+    <aside class="side">
+      <div>
+        <div class="k">This window</div>
+        <div class="stats">
+          <div class="stat"><div class="n" id="n-fire">0</div><div class="l">firing now</div></div>
+          <div class="stat"><div class="n" id="n-ever">0</div><div class="l">ever in cascade</div></div>
+          <div class="stat"><div class="n" id="n-spk">0</div><div class="l">spikes / sec</div></div>
+          <div class="stat"><div class="n" id="n-mv">—</div><div class="l">mean membrane</div></div>
+          <div class="stat"><div class="n" id="n-vis">0</div><div class="l">visual</div></div>
+          <div class="stat"><div class="n" id="n-mot">0</div><div class="l">motor / VNC</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="k">Pokes</div>
+        <div class="stat"><div class="n" id="pokes">0</div><div class="l">injections into optic lobe</div></div>
+      </div>
+      <p class="honesty" id="mode-blurb"></p>
+      <p class="honesty">On flycoinrh’s live feed, every dot is a neuron at its measured soma. Lite mode uses a stylized volume unless annotations are loaded. Full mode runs FlyBrain.run and prefers those detail readouts.</p>
+    </aside>
+  </main>
+  <div class="note-strip">
+    <b>Click either pane.</b> Lite: leaky cascade along optic lobe → central brain → VNC.
+    Full: signed LIF graph. Connectome CC-BY. Private preview.
+  </div>
+  <script type="module" src="/static/js/avalanche.js"></script>
+</body>
+</html>
