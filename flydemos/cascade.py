@@ -29,6 +29,7 @@ class Cascade:
         # Each cell samples a handful of neighbors in the same / adjacent region.
         self.nbrs = self._wire(rng)
         self.ever = np.zeros(cloud.n, dtype=bool)
+        self.glow = np.zeros(cloud.n, dtype=np.float32)
         self.t = 0
         self.last_fired: np.ndarray = np.array([], dtype=np.int32)
 
@@ -69,24 +70,27 @@ class Cascade:
         du = xyz[:, 0] - (u * 2 - 1)
         dv = xyz[:, 2] - (v * 2 - 1)
         d = du * du + dv * dv
-        take = idx[np.argsort(d)[: max(40, len(idx) // 18)]]
-        self.v[take] += amp
+        take = idx[np.argsort(d)[: max(80, len(idx) // 10)]]
+        self.v[take] += 3.4
+        self.glow[take] = np.maximum(self.glow[take], 0.85)
         return int(len(take))
 
     def step(self) -> dict:
         self.t += 1
-        self.v *= 0.82
+        self.v *= 0.88
+        self.glow *= 0.93
         self.refr = np.maximum(self.refr - 1, 0)
-        fired = np.flatnonzero((self.v > 1.0) & (self.refr <= 0))
+        fired = np.flatnonzero((self.v > 0.72) & (self.refr <= 0))
         self.last_fired = fired.astype(np.int32)
         if len(fired):
             self.ever[fired] = True
-            self.refr[fired] = 3
+            self.glow[fired] = 1.0
+            self.refr[fired] = 2
             self.v[fired] = 0.0
             inject = np.zeros_like(self.v)
             for i in fired:
-                tgt, w = self.nbrs[int(i)]
-                inject[tgt] += w * 1.65
+                tgt, _w = self.nbrs[int(i)]
+                inject[tgt] += 0.78
             self.v += inject
         vis = self.cloud.optic_indices()
         mot = np.flatnonzero(self.cloud.region == "vnc")
@@ -99,22 +103,30 @@ class Cascade:
             "mean_mv": float(-52.0 + 8.0 * self.v.mean()),
         }
 
-    def scatter(self, limit: int = 900) -> list:
-        fired = self.last_fired
-        if len(fired) == 0:
+    def scatter(self, limit: int = 1200) -> list:
+        idx = np.flatnonzero(self.glow > 0.08)
+        if len(idx) == 0:
             return []
-        if len(fired) > limit:
-            fired = fired[np.linspace(0, len(fired) - 1, limit).astype(int)]
+        if len(idx) > limit:
+            idx = idx[np.linspace(0, len(idx) - 1, limit).astype(int)]
         pts = []
         xyz = self.cloud.xyz
-        for i in fired:
+        for i in idx:
             x, y, z = xyz[int(i)]
-            pts.append([round(float(x), 3), round(float(y), 3), round(float(z), 3)])
+            pts.append(
+                [
+                    round(float(x), 3),
+                    round(float(y), 3),
+                    round(float(z), 3),
+                    round(float(self.glow[int(i)]), 3),
+                ]
+            )
         return pts
 
     def reset(self) -> None:
         self.v[:] = 0
         self.refr[:] = 0
         self.ever[:] = False
+        self.glow[:] = 0
         self.last_fired = np.array([], dtype=np.int32)
         self.t = 0

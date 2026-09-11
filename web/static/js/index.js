@@ -2,6 +2,7 @@ import { HexEye } from "./hex.js";
 import { connectDemo, $ } from "./core.js";
 
 const eye = new HexEye($("hero"));
+eye.shimmer = true;
 let rates = null;
 
 connectDemo("chase", {

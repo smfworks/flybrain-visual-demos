@@ -94,12 +94,16 @@ class HexRetina:
         img: np.ndarray,
         cx: float,
         cy: float,
-        fov_w: float = 300,
-        fov_h: float = 210,
+        fov_w: float | None = None,
+        fov_h: float | None = None,
         max_hz: float = ON_HZ,
     ) -> dict[str, np.ndarray]:
         """Sample `img` (H×W luminance 0–1) around the cursor. Same as FlyEye.look."""
         H, W = img.shape[:2]
+        if fov_w is None:
+            fov_w = float(W)
+        if fov_h is None:
+            fov_h = float(H)
 
         def sample(uv):
             u, v = uv

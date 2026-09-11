@@ -60,24 +60,24 @@ def pool_from_retina(on_rate: np.ndarray, u: np.ndarray, v: np.ndarray) -> dict:
     cu = float((u * w).sum() / mass)
     cv = float((v * w).sum() / mass)
     intensity = float(np.clip(w.mean() / 180.0, 0, 1))
-    # Keep a floor so a dim field still produces a readable gauge.
-    drive = 0.22 + 0.78 * intensity
-    steer_r = max(0.0, (cu - 0.5) * 2.0) * TURN_SCALE * drive
-    steer_l = max(0.0, (0.5 - cu) * 2.0) * TURN_SCALE * drive
-    # Target below gaze (cv > 0.5 in image coords) → less forward; above → more.
-    fwd = (0.35 + 0.65 * intensity) * 240.0
-    fwd *= float(np.clip(1.15 - 0.5 * (cv - 0.5), 0.45, 1.25))
+    peak = float(np.clip(w.max() / 180.0, 0, 1))
+    # Peak, not mean: a small bright target should still steer hard.
+    # No floor — a dark FOV must not walk the fly off the page.
+    steer_r = max(0.0, (cu - 0.5) * 2.0) * TURN_SCALE * peak
+    steer_l = max(0.0, (0.5 - cu) * 2.0) * TURN_SCALE * peak
+    fwd = peak * 200.0 * float(np.clip(1.1 - 0.6 * (cv - 0.5), 0.35, 1.2))
     return {
         "steer_L": float(steer_l),
         "steer_R": float(steer_r),
         "fwd_L": float(fwd),
         "fwd_R": float(fwd),
         "back": 0.0,
-        "stop": float(max(0.0, 40.0 * intensity * (1.0 - abs(cu - 0.5) * 3.0))),
+        "stop": float(max(0.0, 80.0 * peak * (1.0 - abs(cu - 0.5) * 4.0))),
         "click": 0.0,
         "centroid_u": cu,
         "centroid_v": cv,
         "intensity": intensity,
+        "peak": peak,
     }
 
 

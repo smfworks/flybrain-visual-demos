@@ -65,6 +65,7 @@ class LiteBrain:
             self.field_w,
             self.target["x"] * self.field_w,
             self.target["y"] * self.field_h,
+            sigma=32.0,
         )
 
     def _step_vision(self, img: np.ndarray) -> tuple[dict, dict, dict]:
@@ -78,8 +79,17 @@ class LiteBrain:
         return drive, hz, out
 
     def _move(self, out: dict) -> None:
-        self.cx = float(np.clip(self.cx + out["dx"] * 0.45, 8, self.field_w - 8))
-        self.cy = float(np.clip(self.cy + out["dy"] * 0.45, 8, self.field_h - 8))
+        dx, dy = out["dx"] * 0.45, out["dy"] * 0.45
+        if self.cy < 48 and dy < 0:
+            dy *= 0.15
+        if self.cy > self.field_h - 48 and dy > 0:
+            dy *= 0.15
+        if self.cx < 48 and dx < 0:
+            dx *= 0.15
+        if self.cx > self.field_w - 48 and dx > 0:
+            dx *= 0.15
+        self.cx = float(np.clip(self.cx + dx, 24, self.field_w - 24))
+        self.cy = float(np.clip(self.cy + dy, 24, self.field_h - 24))
         nx, ny = self.cx / self.field_w, self.cy / self.field_h
         self.trail.append([round(nx, 4), round(ny, 4)])
         if len(self.trail) > 180:

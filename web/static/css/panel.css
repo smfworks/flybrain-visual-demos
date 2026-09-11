@@ -121,8 +121,33 @@ button:disabled { opacity: 0.4; cursor: not-allowed }
 }
 .plate canvas { display: block; width: 100%; height: 100%; }
 .plate.tall { min-height: calc(100vh - 58px) }
-body.demo .stage { min-height: calc(100vh - 110px) }
-body.demo .plate.tall, body.demo .split { height: calc(100vh - 110px) }
+body.demo .stage { height: calc(100vh - 58px - 48px); min-height: 0 }
+body.demo .plate.tall, body.demo .split { height: 100%; min-height: 0 }
+.split.four { height: calc(100vh - 106px) !important; }
+.split.four .pane { min-height: 0; height: 100%; }
+.nose-grid {
+  display: grid;
+  grid-template-rows: 1.15fr 0.95fr;
+  gap: 1px;
+  background: var(--line);
+  height: 100%;
+  min-height: 0;
+}
+.gain-meter {
+  height: 10px;
+  background: #12171d;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+.gain-meter span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--amber);
+  box-shadow: 0 0 12px rgba(240,188,95,0.45);
+}
+.gain-meter.cyan span { background: var(--cyan); box-shadow: 0 0 12px rgba(125,234,255,0.4) }
 .corner {
   position: absolute;
   font-size: 10.5px;
@@ -140,11 +165,11 @@ body.demo .plate.tall, body.demo .split { height: calc(100vh - 110px) }
 
 .side {
   background: var(--ground);
-  padding: 18px 20px 28px;
+  padding: 22px 20px 28px;
   display: grid;
   gap: 22px;
   align-content: start;
-  max-height: calc(100vh - 58px);
+  height: 100%;
   overflow: auto;
 }
 .k {
@@ -219,7 +244,8 @@ body.demo .plate.tall, body.demo .split { height: calc(100vh - 110px) }
 }
 .pane {
   background: #05070b;
-  min-height: 280px;
+  min-height: 0;
+  height: 100%;
   position: relative;
 }
 .pane h3 {

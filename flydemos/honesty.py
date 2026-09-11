@@ -58,8 +58,10 @@ COPY = {
         "Lite mode does not claim the 10.2M-synapse graph is running. L1/L2 "
         "rates are real samples of the stimulus. Descending-neuron Hz are a "
         "reduced spatial pooling of those columns (brightness centroid → DNa02 "
-        "L/R, mean ON luminance → DNa01), then decoded with FlyPilot's equations. "
-        "When graph.npz is present, FlyPilot.step replaces that pooling."
+        "L/R, peak ON luminance → DNa01), then decoded with FlyPilot's equations. "
+        "Lite demos use a wide FOV so the target stays in the mosaic; flycoinrh's "
+        "launchpad used a tight 300×210 window. When graph.npz is present, "
+        "FlyPilot.step replaces the pooling."
     ),
     "learning": (
         "The circuit, the KC→MBON site, and depression-not-potentiation are "

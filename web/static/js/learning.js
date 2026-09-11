@@ -14,6 +14,9 @@ connectDemo("learning", {
     $("p-delta").textContent = (st.punish_delta_pct ?? 0).toFixed(1) + "%";
     $("r-gain").textContent = st.reward_gain ?? "1.000";
     $("p-gain").textContent = st.punish_gain ?? "1.000";
+    const rm = $("r-meter"), pm = $("p-meter");
+    if (rm) rm.style.width = Math.max(8, (st.reward_gain ?? 1) * 100) + "%";
+    if (pm) pm.style.width = Math.max(8, (st.punish_gain ?? 1) * 100) + "%";
     $("n-syn").textContent = (st.synapses || 0).toLocaleString();
     $("n-dep").textContent = (st.depressed || 0).toLocaleString();
     $("n-rew").textContent = (st.rewards || 0).toLocaleString();

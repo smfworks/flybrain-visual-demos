@@ -20,6 +20,8 @@ export class HexEye {
     this.on = [];
     this.off = [];
     this.source = "";
+    this.shimmer = false;
+    this.t0 = performance.now();
   }
   layout(hex) {
     if (!hex) return;
@@ -34,7 +36,7 @@ export class HexEye {
     if (vision.on) this.on = vision.on;
     if (vision.off) this.off = vision.off;
   }
-  draw({ accent = null, poke = null } = {}) {
+  draw({ poke = null } = {}) {
     const c = this.c, g = this.g;
     const d = fitCanvas(c);
     const W = c.width, H = c.height;
@@ -60,25 +62,33 @@ export class HexEye {
     const ox = (W - (maxX - minX) * s) / 2;
     const oy = (H - (maxY - minY) * s) / 2;
     const r = s * 0.54;
+    const t = (performance.now() - this.t0) / 1000;
+    const gx = minX + (0.5 + 0.38 * Math.sin(t * 0.7)) * (maxX - minX);
+    const gy = minY + (0.5 + 0.32 * Math.cos(t * 0.51)) * (maxY - minY);
 
     for (let i = 0; i < xy.length; i++) {
       const px = ox + (xy[i][0] - minX) * s;
       const py = oy + (xy[i][1] - minY) * s;
-      const on = (this.on[i] || 0) / 100;
-      const off = (this.off[i] || 0) / 100;
-      const a = Math.max(0.04, Math.min(1, on * 0.95 + off * 0.12));
-      g.fillStyle = `rgba(125,234,255,${a.toFixed(3)})`;
+      let on = (this.on[i] || 0) / 100;
+      if (this.shimmer) {
+        const dd = (xy[i][0] - gx) ** 2 + (xy[i][1] - gy) ** 2;
+        on = Math.max(on, Math.exp(-dd / 14));
+      }
+      g.strokeStyle = "rgba(125,234,255,0.14)";
+      g.lineWidth = Math.max(0.6, 0.6 * d);
       hexPath(g, px, py, r);
-      g.fill();
+      g.stroke();
+      const a = Math.max(0.0, Math.min(1, on));
+      if (a > 0.04) {
+        g.fillStyle = `rgba(125,234,255,${(0.12 + a * 0.88).toFixed(3)})`;
+        hexPath(g, px, py, r);
+        g.fill();
+      }
       if (on > 0.55) {
-        g.fillStyle = `rgba(234,244,250,${((on - 0.55) * 0.9).toFixed(3)})`;
+        g.fillStyle = `rgba(234,244,250,${((on - 0.55) * 0.95).toFixed(3)})`;
         hexPath(g, px, py, r * 0.38);
         g.fill();
       }
-    }
-    if (accent) {
-      const ax = ox + (accent.x * (maxX - minX)) * s; // unused
-      void ax;
     }
     if (poke) {
       g.strokeStyle = "rgba(240,188,95,0.85)";
