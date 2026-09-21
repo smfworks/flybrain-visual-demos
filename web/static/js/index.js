@@ -9,7 +9,7 @@ connectDemo("chase", {
   onHello(m) {
     eye.layout(m.hex);
     const pill = $("live-mode");
-    if (pill) pill.textContent = (m.label || "LITE") + " · private preview";
+    if (pill) pill.textContent = (m.label || "LITE") + " · community pack";
     $("pip") && $("pip").classList.add("on");
   },
   onFrame(m) {
@@ -28,6 +28,6 @@ fetch("/api/status")
   .then((r) => r.json())
   .then((d) => {
     const el = $("live-mode");
-    if (el) el.textContent = `${d.label} · private preview`;
+    if (el) el.textContent = `${d.label} · community pack`;
   })
   .catch(() => {});

@@ -1,3 +1,3 @@
-"""Private preview demos for the Drosophila CNS connectome simulation."""
+"""Public community gallery of Drosophila CNS connectome visual demos."""
 
 __version__ = "0.1.0"
