@@ -10,9 +10,12 @@ def test_pages_boot():
         for p in PAGES:
             r = client.get(p)
             assert r.status_code == 200, p
-            assert b"private" in r.content.lower() or p != "/"
+        home = client.get("/").content.lower()
+        assert b"private preview" not in home
+        assert b"not published" not in home
+        assert b"community pack" in home
         st = client.get("/api/status").json()
-        assert st["private"] is True
+        assert st["private"] is False
         assert st["credit"] == "fruitflydev/flycoinrh"
         assert "CC-BY" in st["connectome"]
         assert st["counts"]["neurons"] == 165122

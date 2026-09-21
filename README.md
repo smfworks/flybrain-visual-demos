@@ -1,14 +1,26 @@
 # flybrain-visual-demos
 
-Private preview — **not published**. A gallery of highly visual demos on the
-digital fruit-fly brain, in the instrument-panel spirit of
-[flybrain.online](https://flybrain.online) / [fruitflydev/flycoinrh](https://github.com/fruitflydev/flycoinrh).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
+[![Live demo](https://img.shields.io/badge/live-flybrain.aionasmfworks.com-0ea5e9)](https://flybrain.aionasmfworks.com)
+
+A public gallery of highly visual demos on the digital fruit-fly brain, in the
+instrument-panel spirit of [flybrain.online](https://flybrain.online) /
+[fruitflydev/flycoinrh](https://github.com/fruitflydev/flycoinrh).
+
+**Live:** [https://flybrain.aionasmfworks.com](https://flybrain.aionasmfworks.com)
 
 This repo does **not** own the connectome. 165,122 neurons and 10,228,000
 signed synapses were measured from a male *Drosophila melanogaster* by EM
 (CC-BY HHMI Janelia FlyEM, Cambridge Connectomics Group, Google Research).
 The simulation approach follows flycoinrh (LIF, 892-hex L1/L2, DNa02 / DNa01 /
 MDN / DNp09, KC→MBON depression). MIT covers **new code here only**.
+
+## Community pack
+
+SMF Works ships this gallery. Connectome data and the simulation approach
+follow [fruitflydev/flycoinrh](https://github.com/fruitflydev/flycoinrh).
+Not affiliated with Janelia, Cambridge, Google, or fruitflydev.
 
 ## Five demos
 
@@ -20,7 +32,9 @@ MDN / DNp09, KC→MBON depression). MIT covers **new code here only**.
 | `/sees` | Page texture → mosaic → DN gauges → path | Same pipeline as chase, four labelled readouts. |
 | `/nose` | Plume, 53 receptor types, walk bias | 2,635 ORNs / 53 types unused in flycoinrh. cVA→ORN_DA1→pC1 222 Hz is their measurement. DN bias from ORNs is demo wiring. |
 
-## Run locally (lite — immediate)
+## Quick start
+
+Needs **Python 3.12+**. Lite mode is immediate — no 1.1 GB connectome download.
 
 ```bash
 python3 -m venv .venv
@@ -29,15 +43,24 @@ pip install -r requirements.txt
 python -m flydemos
 ```
 
-Open [http://127.0.0.1:4747](http://127.0.0.1:4747). No 1.1 GB download.
-Lite mode samples the stimulus through 892 hex columns with flycoinrh's
-FlyEye math, pools L1 onto DNa02/DNa01 (phototaxis-like, **labelled**), and
-decodes the cursor with FlyPilot's equations. Impressive without pretending
-to be 165,122 LIF neurons.
+Open [http://127.0.0.1:4747](http://127.0.0.1:4747). Lite mode samples the
+stimulus through 892 hex columns with flycoinrh's FlyEye math, pools L1 onto
+DNa02/DNa01 (phototaxis-like, **labelled**), and decodes the cursor with
+FlyPilot's equations. Impressive without pretending to be 165,122 LIF neurons.
 
 `PORT` overrides the default `4747`.
 
-## Full-brain mode
+### Docker Compose (lite)
+
+```bash
+docker compose up --build
+```
+
+Same lite gallery on port 4747. The shipped compose file does **not** mount
+the 1.1 GB graph. Anatomy / full-brain mounts: [docs/compose.md](docs/compose.md).
+Public-host notes: [docs/host.md](docs/host.md).
+
+## Full-brain / annotations
 
 The signed graph is ~1.1 GB and is **not in git**.
 
@@ -47,7 +70,6 @@ python scripts/fetch_connectome.py --annotations-only
 
 # clone flycoinrh, fetch weights, build graph.npz
 python scripts/fetch_connectome.py --full
-# then:
 export FLYCOINRH_ROOT=$PWD/vendor/flycoinrh
 pip install pandas pyarrow scipy   # flysim dependencies
 python -m flydemos

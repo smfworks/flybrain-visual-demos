@@ -42,7 +42,7 @@ COPY = {
     "connectome": (
         "165,122 neurons and 10,228,000 signed synapses from the male "
         "Drosophila CNS EM volume (CC-BY Janelia FlyEM / Cambridge / Google). "
-        "This preview does not own that data."
+        "This gallery does not own that data."
     ),
     "retina": (
         "892 retinotopic hex columns into L1 (ON) and L2 (OFF), the lamina "
@@ -85,7 +85,7 @@ COPY = {
         "decoration; these demos are not that."
     ),
     "private": (
-        "Private preview — not published. Simulation approach after "
+        "Community pack from SMF Works. Simulation approach after "
         "fruitflydev/flycoinrh, Shiu et al. 2024 and Lappalainen et al. 2024. "
         "Not affiliated with them, nor with pons or Robinhood."
     ),
@@ -102,7 +102,7 @@ def payload(mode: str, extras: dict | None = None) -> dict:
         "copy": COPY,
         "credit": "fruitflydev/flycoinrh",
         "connectome": "CC-BY HHMI Janelia FlyEM, Cambridge Connectomics Group, Google Research",
-        "private": True,
+        "private": False,
     }
     if extras:
         out.update(extras)

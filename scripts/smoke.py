@@ -41,7 +41,7 @@ def main() -> int:
             assert r.status_code == 200, (path, r.status_code)
             print(f"  GET {path:16} {r.status_code}")
         st = client.get("/api/status").json()
-        assert st["private"] is True
+        assert st["private"] is False
         assert st["counts"]["hex_columns"] == 892
         print(f"  mode {st['label']}")
         with client.websocket_connect("/ws/chase") as ws:

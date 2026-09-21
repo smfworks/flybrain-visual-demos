@@ -1,0 +1,37 @@
+[Unit]
+Description=SMF Works flybrain visual demos (lite gallery)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# --- paths (required edit) ---
+# This unit is a template. Replace /opt/flybrain-visual-demos with your
+# clone path before enabling.
+#
+# User unit:
+#   mkdir -p ~/.config/systemd/user
+#   cp deploy/flybrain-visual-demos.service ~/.config/systemd/user/
+#   # edit the paths below, then:
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now flybrain-visual-demos
+#
+# System-wide: copy to /etc/systemd/system/, set User=/Group=, and use
+# WantedBy=multi-user.target with systemctl (not --user).
+#
+# Prefer `docker compose up --build` (see docs/compose.md) if you do not
+# want a venv on the host.
+ExecStart=/opt/flybrain-visual-demos/.venv/bin/python -m flydemos
+WorkingDirectory=/opt/flybrain-visual-demos
+Restart=always
+RestartSec=3
+
+# Gallery binds 0.0.0.0 (see flydemos.app). Put a reverse proxy in front
+# for flybrain.aionasmfworks.com — docs/host.md.
+Environment=PORT=4747
+
+KillSignal=SIGTERM
+TimeoutStopSec=10
+
+[Install]
+WantedBy=default.target

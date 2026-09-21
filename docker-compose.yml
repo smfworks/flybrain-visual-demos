@@ -1,0 +1,10 @@
+# Lite gallery — no 1.1 GB connectome required.
+# Anatomy / full-brain mounts: docs/compose.md
+services:
+  flybrain:
+    build: .
+    ports:
+      - "4747:4747"
+    environment:
+      PORT: "4747"
+    restart: unless-stopped
